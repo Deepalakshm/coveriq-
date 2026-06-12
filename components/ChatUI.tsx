@@ -99,13 +99,22 @@ useEffect(() => {
   }, [messages.length, isLoading]);
 
   return (
-    <div className="flex flex-col h-screen" style={{ background: '#F4F6F9' }}>
+   <div className="flex flex-col h-screen" style={{ background: '#F8FAFC' }}>
 
       {/* Header */}
-      <header className="px-5 py-3 flex items-center gap-3 border-b"
-        style={{ background: '#fff', borderColor: '#E2E8F0' }}>
+    <header
+  className="h-[82px] px-6 flex items-center gap-3 border-b"
+  style={{
+    background: '#fff',
+    borderColor: '#E2E8F0',
+    boxShadow: '0 1px 8px rgba(15,23,42,0.04)',
+  }}
+>
         <div className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-medium flex-shrink-0"
-          style={{ background: '#0C1B33', color: '#1D9E75' }}>
+          style={{
+  background: '#1D9E75',
+  color: '#FFFFFF',
+}}>
           C
         </div>
         <div className="flex-1">
@@ -115,23 +124,67 @@ useEffect(() => {
             Insurance Assistant · Online
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <LanguageToggle language={language} onChange={setLanguage} />
-          <select
-            value={specialty}
-            onChange={(e) => setSpecialty(e.target.value as Specialty)}
-            className="text-sm rounded-lg px-3 py-1.5 border focus:outline-none"
-            style={{ borderColor: '#CBD5E1', color: '#0C1B33', background: '#F8FAFC' }}
-          >
-            {SPECIALTIES.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
-        </div>
+       <div className="flex items-center gap-2">
+  <LanguageToggle language={language} onChange={setLanguage} />
+
+  <div className="relative">
+    <select
+      value={specialty}
+      onChange={(e) => setSpecialty(e.target.value as Specialty)}
+      className="
+        appearance-none
+        cursor-pointer
+        rounded-xl
+        border
+        pl-4
+        pr-10
+        py-2.5
+        text-sm
+        font-medium
+        transition-all
+        hover:border-slate-400
+        focus:outline-none
+        focus:ring-2
+      "
+     style={{
+  background: '#FFFFFF',
+  color: '#0C1B33',
+  border: '1px solid #E2E8F0',
+  minWidth: '220px',
+  height: '44px',
+  borderRadius: '12px',
+  boxShadow: '0 2px 10px rgba(15,23,42,0.05)',
+}}
+    >
+      {SPECIALTIES.map((s) => (
+        <option key={s} value={s}>
+          {s}
+        </option>
+      ))}
+    </select>
+
+    {/* Premium Dropdown Arrow */}
+    <svg
+      className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+      width="18"
+      height="18"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="#64748B"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+</div>
       </header>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-3 max-w-3xl w-full mx-auto">
+      <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-4 max-w-4xl w-full mx-auto hide-scrollbar">
         {messages.map((m: any, idx: number) => (
           <div key={m.id} className="group">
 
@@ -140,11 +193,19 @@ useEffect(() => {
               <>
                 <div className="flex items-end gap-2">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold flex-shrink-0"
-                    style={{ background: '#0C1B33', color: '#1D9E75' }}>
+                    style={{
+  background: '#1D9E75',
+  color: '#FFFFFF',
+}}>
                     C
                   </div>
                   <div className="max-w-lg px-4 py-3 rounded-2xl rounded-bl-sm text-sm leading-relaxed"
-                    style={{ background: '#fff', color: '#1E293B', border: '0.5px solid #E2E8F0' }}>
+                    style={{
+  background: '#FFFFFF',
+  color: '#1E293B',
+  border: '1px solid #E2E8F0',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+}}>
                     <MarkdownMessage content={extractText(m)} />
                   </div>
                 </div>
@@ -179,7 +240,10 @@ useEffect(() => {
         {isLoading && (
           <div className="flex items-end gap-2">
             <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold"
-              style={{ background: '#0C1B33', color: '#1D9E75' }}>
+              style={{
+  background: '#1D9E75',
+  color: '#FFFFFF',
+}}>
               C
             </div>
             <div className="px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1 items-center"
@@ -205,8 +269,15 @@ useEffect(() => {
       )}
 
       {/* Input */}
-      <div className="px-4 py-4 border-t" style={{ background: '#fff', borderColor: '#E2E8F0' }}>
-        <form onSubmit={handleSubmit} className="flex gap-3 max-w-3xl mx-auto">
+      <div
+  className="px-4 py-4 border-t"
+  style={{
+    background: '#fff',
+    borderColor: '#E2E8F0',
+    boxShadow: '0 -2px 10px rgba(0,0,0,0.05)',
+  }}
+>
+        <form onSubmit={handleSubmit} className="flex gap-3 max-w-4xl mx-auto">
           <input
             value={input}
             onChange={handleInputChange}
@@ -217,11 +288,12 @@ useEffect(() => {
             }
             disabled={isLoading}
             className="flex-1 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 disabled:opacity-50"
-            style={{
-              border: '1px solid #CBD5E1',
-              background: '#F8FAFC',
-              color: '#0C1B33',
-            }}
+           style={{
+  border: '1px solid #CBD5E1',
+  background: '#FFFFFF',
+  color: '#0C1B33',
+  boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+}}
           />
           {isLoading ? (
             <button
@@ -233,14 +305,24 @@ useEffect(() => {
               ■ Stop
             </button>
           ) : (
-            <button
-              type="submit"
-              disabled={!input.trim()}
-              className="px-5 py-3 rounded-xl text-sm font-medium transition-colors disabled:opacity-40"
-              style={{ background: '#0C1B33', color: '#1D9E75' }}
-            >
-              {language === 'Tamil' ? 'அனுப்பு' : 'Send'}
-            </button>
+           <button
+  type="submit"
+  disabled={!input.trim()}
+  className="
+    px-6 py-3 rounded-xl text-sm font-semibold
+    transition-all duration-200
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    hover:brightness-95
+  "
+  style={{
+    background: '#1D9E75',
+    color: '#FFFFFF',
+    minWidth: '100px',
+  }}
+>
+  {language === 'Tamil' ? 'அனுப்பு' : 'Send'}
+</button>
           )}
         </form>
         {isLoading && (

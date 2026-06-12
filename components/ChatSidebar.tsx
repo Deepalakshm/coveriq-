@@ -12,13 +12,13 @@ interface ChatSidebarProps {
 }
 
 const SPECIALTY_COLORS: Record<string, { bg: string; color: string }> = {
-  'Health Insurance':  { bg: '#1E3A5F', color: '#7EB8F7' },
-  'Motor Insurance':   { bg: '#1A3A2A', color: '#5DCAA5' },
-  'Life Insurance':    { bg: '#2D2458', color: '#AFA9EC' },
-  'Travel Insurance':  { bg: '#3A2A10', color: '#FAC775' },
-  'General Practice':  { bg: '#1E3A5F', color: '#7EB8F7' },
-  'Dermatology':       { bg: '#3A1A2A', color: '#ED93B1' },
-  'Mental Health':     { bg: '#2D2458', color: '#AFA9EC' },
+  'Health Insurance': { bg: '#1E3A5F', color: '#7EB8F7' },
+  'Motor Insurance': { bg: '#1A3A2A', color: '#5DCAA5' },
+  'Life Insurance': { bg: '#2D2458', color: '#AFA9EC' },
+  'Travel Insurance': { bg: '#3A2A10', color: '#FAC775' },
+  'General Practice': { bg: '#1E3A5F', color: '#7EB8F7' },
+  Dermatology: { bg: '#3A1A2A', color: '#ED93B1' },
+  'Mental Health': { bg: '#2D2458', color: '#AFA9EC' },
 };
 
 export default function ChatSidebar({
@@ -31,99 +31,207 @@ export default function ChatSidebar({
 }: ChatSidebarProps) {
   return (
     <aside
-      className="w-64 flex flex-col h-screen flex-shrink-0"
+      className="w-70 flex flex-col h-screen flex-shrink-0"
       style={{ background: '#0C1B33' }}
     >
-      {/* Logo */}
-      <div className="px-4 py-5 flex items-center gap-3"
-        style={{ borderBottom: '0.5px solid #1E3A5F' }}>
+      {/* Header */}
+      <div
+        className="h-[82px] px-5 flex items-center gap-3"
+        style={{
+          borderBottom: '1px solid #1E3A5F',
+        }}
+      >
         <div
-          className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-semibold flex-shrink-0"
-          style={{ background: '#1D9E75', color: '#fff' }}
+          className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-semibold flex-shrink-0"
+          style={{
+            background: '#1D9E75',
+            color: '#FFFFFF',
+          }}
         >
           C
         </div>
+
         <div>
-          <p className="font-semibold text-sm" style={{ color: '#E8F4F0' }}>CoverIQ</p>
-          <p className="text-xs" style={{ color: '#4D7A8A' }}>Insurance Assistant</p>
+          <p
+            className="font-semibold"
+            style={{
+              color: '#E8F4F0',
+              fontSize: '15px',
+            }}
+          >
+            CoverIQ
+          </p>
+
+          <p
+            className="text-xs"
+            style={{
+              color: '#7A98AD',
+            }}
+          >
+            Insurance Assistant
+          </p>
         </div>
       </div>
 
-      {/* New conversation button */}
-      <div className="px-3 py-3">
+      {/* New Chat */}
+      <div className="px-4 py-4">
         <button
           onClick={onNewChat}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer"
-          style={{ background: '#1D9E75', color: '#fff', border: 'none' }}
-          onMouseEnter={e => (e.currentTarget.style.background = '#0F6E56')}
-          onMouseLeave={e => (e.currentTarget.style.background = '#1D9E75')}
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer"
+          style={{
+            background: '#1D9E75',
+            color: '#FFFFFF',
+            border: 'none',
+            boxShadow: '0 2px 8px rgba(29,158,117,.25)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = '#0F6E56';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = '#1D9E75';
+          }}
         >
-          <span style={{ fontSize: '16px', fontWeight: 300 }}>+</span>
-          New conversation
+          <span
+            style={{
+              fontSize: '18px',
+              fontWeight: 300,
+            }}
+          >
+            +
+          </span>
+          New Conversation
         </button>
       </div>
 
-      {/* Section label */}
+      {/* Section Label */}
       {sessions.length > 0 && (
-        <p className="px-4 pb-1 text-xs font-medium uppercase tracking-widest"
-          style={{ color: '#2D5A70' }}>
-          Recent
-        </p>
+        <div className="px-5 pb-2">
+          <p
+            className="text-xs font-medium uppercase"
+            style={{
+              color: '#4D7A8A',
+              letterSpacing: '0.12em',
+            }}
+          >
+            Recent Chats
+          </p>
+        </div>
       )}
 
-      {/* History list */}
-      <div className="flex-1 overflow-y-auto px-2 pb-4">
+      {/* Chat History */}
+      <div className="flex-1 overflow-y-auto px-2 pb-4 hide-scrollbar">
         {loadingHistory ? (
           <div className="flex items-center justify-center py-10">
-            <div className="w-4 h-4 rounded-full border-2 animate-spin"
-              style={{ borderColor: '#1D9E75', borderTopColor: 'transparent' }} />
+            <div
+              className="w-5 h-5 rounded-full border-2 animate-spin"
+              style={{
+                borderColor: '#1D9E75',
+                borderTopColor: 'transparent',
+              }}
+            />
           </div>
         ) : sessions.length === 0 ? (
-          <p className="text-center text-xs py-8 px-4"
-            style={{ color: '#2D5A70' }}>
-            No conversations yet.<br />Start chatting!
-          </p>
+          <div className="text-center px-6 py-10">
+            <p
+              style={{
+                color: '#7A98AD',
+                fontSize: '13px',
+                lineHeight: 1.5,
+              }}
+            >
+              No conversations yet.
+              <br />
+              Start your first insurance conversation.
+            </p>
+          </div>
         ) : (
-          <div className="flex flex-col gap-0.5 py-1">
+          <div className="flex flex-col gap-1">
             {sessions.map((s) => {
               const isActive = s.id === activeSessionId;
-              const badge = SPECIALTY_COLORS[s.specialty] ?? { bg: '#1E3A5F', color: '#7EB8F7' };
+
+              const badge =
+                SPECIALTY_COLORS[s.specialty] ?? {
+                  bg: '#1E3A5F',
+                  color: '#7EB8F7',
+                };
+
               return (
                 <div
                   key={s.id}
                   onClick={() => onSelectSession(s.id)}
-                  className="group flex items-start gap-2 px-3 py-2.5 rounded-lg cursor-pointer transition-all duration-150"
-                  style={{ background: isActive ? '#1E3A5F' : 'transparent' }}
-                  onMouseEnter={e => {
-                    if (!isActive) e.currentTarget.style.background = '#162D47';
+                  className="group flex items-start gap-2 px-4 py-3 rounded-xl cursor-pointer transition-all duration-200"
+                  style={{
+                    background: isActive ? '#162D47' : 'transparent',
+                    borderLeft: isActive
+                      ? '3px solid #1D9E75'
+                      : '3px solid transparent',
                   }}
-                  onMouseLeave={e => {
-                    if (!isActive) e.currentTarget.style.background = 'transparent';
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = '#162D47';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = 'transparent';
+                    }
                   }}
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs truncate"
-                      style={{ color: isActive ? '#E8F4F0' : '#9DB8CC' }}>
+                    <p
+                      className="truncate"
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 500,
+                        color: isActive
+                          ? '#E8F4F0'
+                          : '#C5D7E3',
+                      }}
+                    >
                       {s.preview}
                     </p>
-                    <div className="flex items-center gap-2 mt-1.5">
+
+                    <div className="flex items-center gap-2 mt-2 flex-wrap">
                       <span
-                        className="text-xs px-1.5 py-0.5 rounded-md"
-                        style={{ background: badge.bg, color: badge.color, fontSize: '10px' }}
+                        className="px-2 py-1 rounded-md"
+                        style={{
+                          background: badge.bg,
+                          color: badge.color,
+                          fontSize: '10px',
+                        }}
                       >
                         {s.specialty}
                       </span>
-                      <span className="text-xs" style={{ color: '#2D5A70', fontSize: '10px' }}>
+
+                      <span
+                        style={{
+                          color: '#7A98AD',
+                          fontSize: '11px',
+                          fontWeight: 500,
+                        }}
+                      >
                         {s.createdAt.toLocaleDateString('en-IN')}
                       </span>
                     </div>
                   </div>
+
                   <button
-                    onClick={(e) => { e.stopPropagation(); onDeleteSession(s.id); }}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity text-xs px-1 rounded cursor-pointer"
-                    style={{ color: '#4D7A8A', background: 'transparent', border: 'none' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#E24B4A')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#4D7A8A')}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteSession(s.id);
+                    }}
+                    className="opacity-50 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    style={{
+                      color: '#7A98AD',
+                      background: 'transparent',
+                      border: 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#EF4444';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#7A98AD';
+                    }}
                   >
                     ✕
                   </button>
